@@ -25,13 +25,13 @@ import java.util.concurrent.Callable;
 public class MainController {
 
     /*История изменений:
+    08.11.17 - Подключена БД, дополнены поля в БД, поправлена страница одного устройства, отделена mock реализация репозитория и сервиса
     09.10.17 - Добавлены header и footer ко всем страница, дописана страничка с одним устройством
     * */
 
     /*Развитие проекта:
     1) доделать форму отображения одного устройства
-    2) доделать поиск
-    3) Подключить к программе базу данных
+    3) доделать поиск
     4) написать загрузчик из пдадиби, с фопда, с devicespecifications и с яндекс маркета.
     5) добавить форму добавления на джаве
     6) добавить форму добавления на ajax то есть без перезагрузки страницы.
@@ -54,7 +54,7 @@ public class MainController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Callable<List<Device>> getDevices() {
+    public Callable<Iterable<Device>> getDevices() {
         log.info("getDevices");
         return () -> service.getDevices();
     }

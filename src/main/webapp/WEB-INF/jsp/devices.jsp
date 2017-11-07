@@ -177,7 +177,7 @@
     <p id="demo" style="text-align: center"></p>
     <script>
         var date = new Date().getFullYear();
-        document.getElementById("demo").innerHTML = date + " Copyright ©MDDB";
+        document.getElementById("demo").innerHTML = (date + " Copyright ©MDDB");
     </script>
 </footer>
 </body>

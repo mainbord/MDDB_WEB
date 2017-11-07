@@ -3,46 +3,176 @@ package com.mddb.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.Type;
 
-/**
- * Created by mainbord on 20.09.17.
- */
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "device")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Device {
 
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //main
-    private String dateStartSale;
+    @Column(name = "RELEASE_DATE")
+    @Temporal(TemporalType.DATE)
+    private Date releaseDate;
+
+    @Column(name = "COMPANY_NAME")
     private String companyName;
+
+    @Column(name = "MODEL_NAME")
     private String modelName;
+
+    @Column(name = "OPERATING_SYSTEM")
     private String operatingSystem;
+
+    @Column(name = "FORM_FACTOR")
     private String formFactor;
+
+    @Column (name = "DIMENSION")
     private String dimension;
+
+    @Column (name = "WEIGHT")
     private String weight;
+
+    @Column (name = "BODY_MATERIAL")
     private String bodyMaterial;
+
+    @Column (name = "BODY_COLOR")
     private String bodyColor;
-    private String proof;
+
+    @Column (name = "WATER_PROOF")
+    private String waterProof;
+
+    @Column (name = "DUST_PROOF")
+    private String dustProof;
+
+    @Column (name = "CRASH_WORTHINESS")
     private String crashWorthiness;
+
+    @Column (name = "PACKAGING")
     private String packaging;
+
+    @Column (name = "SOC")
     private String soc;
-    private Cpu cpu;
-    private GraphicalController graphicalController;
-    private Ram ram;
+
+//    private Cpu cpu;
+    @Column(name = "CPU_NUMBER_OF_CORES")
+    private Integer numberOfCores;
+
+    @Column(name = "CPU_ARCHITECTURE")
+    private String architecture;
+
+    @Column(name = "CPU_MAX_FREQUENCY_PER_CORE")
+    private Integer maxFrequencyPerCore; //MHZ
+
+    @Column(name = "CPU_INSTRUCTION")
+    private String instruction;
+
+    @Column(name = "CPU_MANUFACTURING_METHOD")
+    private Integer manufacturingMethod; //nm
+
+//    private GraphicalController graphicalController;
+    @Column(name = "GRAPHICAL_CONTROLLER_NAME")
+    private String gpuControllerName;
+
+    @Column(name = "GRAPHICAL_CONTROLLER_GPU_CLOCK")
+    private Integer gpuClock; // MHZ
+
+//    private Ram ram;
+    @Column(name = "RAM_SIZE")
+    private Integer ramSize; //mb 1024
+
+    @Column(name = "RAM_TYPE")
+    private String ramType; //LPDDR2
+
+    @Column(name = "RAM_CLOCK")
+    private Integer ramClock; //MHZ
+
+    @Column (name = "ROM")
     private String rom;
+
+    @Column (name = "SOUND_CONTROLLER")
     private String soundController;
+
+    @Column (name = "BATTERY")
     private String battery;
+
+    @Column (name = "GPS")
     private String gps;
+
+    @Column (name = "FM_RECEIVER")
     private String fmReceiver;
+
+    @Column (name = "FM_TRANSMITTER")
     private String fmTransmitter;
+
+    @Column (name = "WIRELESS_CHARGER")
     private String wirelessCharger;
+
+    @Column (name = "ANTENNA")
     private String antenna;
+
+    @Column (name = "VIBRATION")
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     private Boolean vibration;
+
+    @Column (name = "LED_NOTIFICATION")
     private String ledNotification;
+
+    @Column (name = "SPEAKER")
     private String speaker;
-    private Display display;
+
+//    private Display display;
+@Column(name = "DISPLAY_DIAGONAL")
+private String displayDiagonal;
+
+    @Column(name = "DISPLAY_RESOLUTION")
+    private String displayResolution;
+
+    @Column(name = "DISPLAY_TYPE")
+//    @Enumerated(EnumType.STRING)
+    private String displayType;
+
+    @Column(name = "DISPLAY_RATIO")
+    private String displayRatio; //по идее должен вычисляться из других параметров
+
+    @Column(name = "DISPLAY_COLOR_AMOUNT")
+    private Integer displayColorAmount;
+
+    @Column(name = "DISPLAY_SENSOR_TYPE")
+//    @Enumerated(EnumType.STRING)
+    private String displaySensorType;
+
+    @Column(name = "DISPLAY_MULTITOUCH")
+    private Integer displayMultitouch;
+
+    @Column(name = "DISPLAY_GLASS_DESCRIPTION")
+    private String displayGlassDescription;
+
+    @Column(name = "DISPLAY_GLARE_FILTER")
+    private Boolean displayGlareFilter;
+
+    @Column(name = "DISPLAY_OLEOPHOBIC")
+    private Boolean displayOleophobic;
+
+
+    public enum displayType {
+        LCD, AMOLED
+    }
+
+    public enum sensorType {
+        RESISTANCE, CAPACITIVE
+    }
     /*
 
 <%--    - SMS, MMS

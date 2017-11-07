@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public interface DbService {
 
-    public List<Device> getDevices();
+    public Iterable<Device> getDevices();
 
     public Set<String> getCompaniesNames();
 

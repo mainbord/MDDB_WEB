@@ -42,8 +42,8 @@
     <th width="300"></th>
     <th width="300"></th>
     <tr class="firststring">
-        <td class="keyname">Date start sale</td>
-        <td>${device.dateStartSale}</td>
+        <td class="keyname">Release date</td>
+        <td>${device.releaseDate}</td>
     </tr>
     <tr class="secondtstring">
         <td class="keyname">Company name</td>
@@ -78,8 +78,12 @@
         <td>${device.bodyColor}</td>
     </tr>
     <tr class="secondtstring">
-        <td class="keyname">Proof</td>
-        <td>${device.proof}</td>
+        <td class="keyname">Water proof</td>
+        <td>${device.waterProof}</td>
+    </tr>
+    <tr class="secondtstring">
+        <td class="keyname">Dust proof</td>
+        <td>${device.dustProof}</td>
     </tr>
     <tr class="firststring">
         <td class="keyname">Crash resistance</td>
@@ -98,62 +102,62 @@
         <td></td>
     </tr>
     <tr class="firststring">
-        <td>&nbsp;-&emsp;arcitechure</td>
-        <td>${device.cpu.arcitechure}</td>
+        <td>&nbsp;-&emsp;Architecture</td>
+        <td>${device.architecture}</td>
     </tr>
     <tr class="secondtstring">
         <td>&nbsp;-&emsp;Max frequency per core</td>
-        <td>${device.cpu.maxFrequencyPerCore}</td>
+        <td>${device.maxFrequencyPerCore}</td>
     </tr>
     <tr class="firststring">
         <td>&nbsp;-&emsp;Instructions</td>
-        <td>${device.cpu.instruction}</td>
+        <td>${device.instruction}</td>
     </tr>
     <tr class="secondtstring">
         <td>&nbsp;-&emsp;Manufacturing method</td>
-        <td>${device.cpu.manufacturingMethod}</td>
+        <td>${device.manufacturingMethod}</td>
     </tr>
     <tr class="firststring">
         <td>&nbsp;-&emsp;Number of cores</td>
-        <td>${device.cpu.numberOfCores}</td>
+        <td>${device.numberOfCores}</td>
     </tr>
     <tr class="firststring">
-        <td class="keyname">GraphicalController</td>
+        <td class="keyname">Graphical Controller</td>
         <td></td>
     </tr>
     <tr class="secondtstring">
         <td>&nbsp;-&emsp;Name</td>
-        <td>${device.graphicalController.name}</td>
+        <td>${device.gpuControllerName}</td>
     </tr>
     <tr class="firststring">
-        <td>&nbsp;-&emsp;CPU clock</td>
-        <td>${device.graphicalController.cpuClock}</td>
+        <td>&nbsp;-&emsp;GPU clock</td>
+        <td>${device.gpuClock}</td>
     </tr>
     <tr class="secondtstring">
         <td class="keyname">RAM</td>
-        <td>${device.ram}</td>
+        <td>${device.ramSize}, ${device.ramType}, ${device.ramClock}</td>
     </tr>
     <tr class="firststring">
         <td class="keyname">ROM</td>
         <td>${device.rom}</td>
     </tr>
     <tr class="secondtstring">
-        <td class="keyname">Sound Controller</td>
+        <td class="keyname">Sound controller</td>
         <td>${device.soundController}</td>
     </tr>    <tr class="firststring">
     <td class="keyname">Battery</td>
     <td>${device.battery}</td>
 </tr>
     <tr class="secondtstring">
-        <td class="keyname">GPS</td>
+        <td class="keyname">Satellite navigation</td>
         <td>${device.gps}</td>
     </tr>
     <tr class="firststring">
-        <td class="keyname">FM Receiver</td>
+        <td class="keyname">FM receiver</td>
         <td>${device.fmReceiver}</td>
     </tr>
     <tr class="secondtstring">
-        <td class="keyname">FM Transmitter</td>
+        <td class="keyname">FM transmitter</td>
         <td>${device.fmTransmitter}</td>
     </tr>
     <tr class="firststring">
@@ -169,7 +173,7 @@
         <td>${device.vibration}</td>
     </tr>
     <tr class="secondtstring">
-        <td class="keyname">LED Notification</td>
+        <td class="keyname">LED notification</td>
         <td>${device.ledNotification}</td>
     </tr>
     <tr class="firststring">
@@ -185,43 +189,43 @@
     </tr>
     <tr class="firststring">
         <td>&nbsp;-&emsp;Diagonal</td>
-        <td>${device.display.diagonal}</td>
+        <td>${device.displayDiagonal}</td>
     </tr>
     <tr class="secondtstring">
         <td>&nbsp;-&emsp;Resolution</td>
-        <td>${device.display.resolution}</td>
+        <td>${device.displayResolution}</td>
     </tr>
     <tr class="firststring">
         <td>&nbsp;-&emsp;Type</td>
-        <td>${device.display.type}</td>
+        <td>${device.displayType}</td>
     </tr>
     <tr class="secondtstring">
         <td>&nbsp;-&emsp;Ratio</td>
-        <td>${device.display.ratio}</td>
+        <td>${device.displayRatio}</td>
     </tr>
     <tr class="firststring">
         <td>&nbsp;-&emsp;Amount of colors</td>
-        <td>${device.display.colorAmount}</td>
+        <td>${device.displayColorAmount}</td>
     </tr>
     <tr class="secondtstring">
         <td>&nbsp;-&emsp;Sensor type</td>
-        <td>${device.display.sensoreType}</td>
+        <td>${device.displaySensorType}</td>
     </tr>
     <tr class="firststring">
         <td>&nbsp;-&emsp;Multitouch</td>
-        <td>${device.display.multitouch}</td>
+        <td>${device.displayMultitouch}</td>
     </tr>
     <tr class="secondtstring">
         <td>&nbsp;-&emsp;Glass</td>
-        <td>${device.display.glassDescription}</td>
+        <td>${device.displayGlassDescription}</td>
     </tr>
     <tr class="firststring">
         <td>&nbsp;-&emsp;Glare filter</td>
-        <td>${device.display.glareFilter}</td>
+        <td>${device.displayGlareFilter}</td>
     </tr>
     <tr class="secondtstring">
         <td>&nbsp;-&emsp;Oleophobic</td>
-        <td>${device.display.oleophobic}</td>
+        <td>${device.displayOleophobic}</td>
     </tr>
 </table> <br><br> <table>
     <th width="300"></th>
@@ -247,7 +251,7 @@
         <td>${device.modelName}</td>
     </tr>
     <tr class="firststring">
-        <td>&nbsp;-&emsp; EDGE</td>
+        <td>&nbsp;-&emsp;EDGE</td>
         <td>${device.modelName}</td>
     </tr>
     <tr class="secondtstring">
@@ -339,11 +343,11 @@
         <td>${device.modelName}</td>
     </tr>
     <tr class="secondtstring">
-        <td>&nbsp;- SlimPort</td>
+        <td>&nbsp;-&emsp;SlimPort</td>
         <td>${device.modelName}</td>
     </tr>
     <tr class="firststring">
-        <td>&nbsp;- USB 2.0</td>
+        <td>&nbsp;-&emsp;USB</td>
         <td>${device.modelName}</td>
     </tr>
     <tr class="secondtstring">
@@ -616,11 +620,7 @@
         <td>${device.modelName}</td>
     </tr>
     <tr class="firststring">
-        <td>&nbsp;- пульсометр (сердечного ритма) отсутствует</td>
-        <td>${device.modelName}</td>
-    </tr>
-    <tr class="secondtstring">
-        <td>&nbsp;-&emsp;ИК-излучения (RGBC-IR) (используется основной камерой для коррекции баланса белого)</td>
+        <td>&nbsp;-&emsp;пульсометр (сердечного ритма)</td>
         <td>${device.modelName}</td>
     </tr>
 </table> <br> <br> <table>
