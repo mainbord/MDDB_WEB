@@ -1,6 +1,6 @@
 package com.mddb.service;
 
-import com.mddb.DAO.MockRepository;
+import com.mddb.dao.MockRepository;
 import com.mddb.domain.Device;
 
 import java.util.Map;
@@ -31,5 +31,10 @@ public class DBServiceMock implements DbService {
     @Override
     public Device getDevice(Integer id) {
         return repository.getDevice(id);
+    }
+
+    @Override
+    public int saveDevices() {
+        return 0;
     }
 }

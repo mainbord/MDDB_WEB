@@ -38,8 +38,14 @@ public class Device {
     @Column(name = "FORM_FACTOR")
     private String formFactor;
 
-    @Column (name = "DIMENSION")
-    private String dimension;
+    @Column (name = "WIDTH")
+    private String width;
+
+    @Column (name = "HEIGHT")
+    private String height;
+
+    @Column (name = "DEPTH")
+    private String depth;
 
     @Column (name = "WEIGHT")
     private String weight;
@@ -133,8 +139,8 @@ public class Device {
     private String speaker;
 
 //    private Display display;
-@Column(name = "DISPLAY_DIAGONAL")
-private String displayDiagonal;
+    @Column(name = "DISPLAY_DIAGONAL")
+    private String displayDiagonal;
 
     @Column(name = "DISPLAY_RESOLUTION")
     private String displayResolution;
@@ -173,15 +179,28 @@ private String displayDiagonal;
     public enum sensorType {
         RESISTANCE, CAPACITIVE
     }
-    /*
 
-<%--    - SMS, MMS
-    - электронная почта (e-mail)
-    - GSM 850, 900, 1800, 1900 МГц
-    - GPRS, скорость до 107 кбит/с
-    - EDGE, скорость до 296 кбит/с
-    - UMTS диапазоны/band 1, 2, 4, 5, 6, 8, 9 (800, 850, 900, 1700, 1900, 2100 МГц)
-    - HSPA+, HSDPA категории 24 (скорость до 42 Мбит/с), HSUPA категории 6 (скорость до 5,8 Мбит/с)
+    @Column(name = "SMS")
+    private Boolean sms;
+
+    @Column(name = "MMS")
+    private Boolean mms;
+
+    @Column(name = "EMAIL")
+    private Boolean email;
+
+    @Column(name = "GSM")
+    private Boolean gsm;
+
+    @Column(name = "GPRS")
+    private Boolean gprs;
+
+    @Column(name = "EdGE")
+    private Boolean edge;
+
+    @Column(name = "UMTS")
+    private Boolean umts;
+/*    - HSPA+, HSDPA категории 24 (скорость до 42 Мбит/с), HSUPA категории 6 (скорость до 5,8 Мбит/с)
     - LTE диапазоны/band 1, 2, 3, 4, 5, 7, 8, 12, 17, 19, 20, 26, 28, 38, 39, 40, 41 (700, 800, 850, 900, 1700, 1800, 1900, 2100, 2300, 2500, 2600 МГц) 15 категории, скорость до 800 Мбит/с к себе и до неизвестно Мбит/с от себя, MIMO 2x2
     - VoLTE
     - CDMA - не поддерживается
@@ -206,8 +225,8 @@ private String displayDiagonal;
     - SlimPort видеовыход не поддерживается
     - USB 2.0 (High speed)
     - USB-Host (OTG, поддержка подключения внешних устройств таких как как съемные накопители, клавиатуры, мыши, игровые контроллеры)
-    - USB-модем (USB tethering)--%>
-Связь:
+    - USB-модем (USB tethering)*/
+/*Связь:
 - GSM 850/900/1800/1900 МГц
 - SMS, MMS
 - GPRS сlass 12

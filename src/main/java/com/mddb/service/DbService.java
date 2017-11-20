@@ -18,4 +18,6 @@ public interface DbService {
     public Map<Integer, String> getDevicesByCompany(String company);
 
     public Device getDevice(Integer id);
+
+    public int saveDevices();
 }

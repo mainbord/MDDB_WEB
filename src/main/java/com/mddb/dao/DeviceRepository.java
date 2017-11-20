@@ -1,4 +1,4 @@
-package com.mddb.DAO;
+package com.mddb.dao;
 
 import com.mddb.domain.Device;
 import org.springframework.data.repository.CrudRepository;

@@ -1,15 +1,13 @@
 package com.mddb.service;
 
-import com.mddb.DAO.DeviceRepository;
-import com.mddb.domain.Cpu;
+import com.mddb.dao.DeviceRepository;
 import com.mddb.domain.Device;
-import com.mddb.domain.Display;
+import com.mddb.loader.DbLoader;
+import com.mddb.loader.PdaDbLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -38,7 +36,7 @@ public class DbServicesImpl implements DbService {
                 Spliterators.spliteratorUnknownSize(
                         repository.findAll().iterator(),
                         Spliterator.ORDERED),
-                 false)
+                false)
                 .map(Device::getCompanyName)
                 .collect(Collectors.toCollection(() -> new TreeSet<String>(Comparator.naturalOrder())));
     }
@@ -56,10 +54,21 @@ public class DbServicesImpl implements DbService {
     public Device getDevice(Integer id) {
         for (Device dev :
                 getDevices()) {
-            if (dev.getId() == id){
+            if (dev.getId() == id) {
                 return dev;
             }
         }
         return null;
+    }
+
+    @Override
+    public int saveDevices() {
+        DbLoader loader = new PdaDbLoader();
+        loader.getUrlDevices();
+        for (Device dev :
+                loader.getDevices()) {
+            repository.save(dev);
+        }
+        return 0;
     }
 }

@@ -63,7 +63,7 @@
     </tr>
     <tr class="secondtstring">
         <td class="keyname">Dimensions</td>
-        <td>${device.dimension}</td>
+        <td>${device.height} * ${device.width} * ${device.depth}</td>
     </tr>
     <tr class="firststring">
         <td class="keyname">Weight</td>
