@@ -40,4 +40,5 @@ dependencies {
     implementation group: 'org.projectlombok', name: 'lombok'
     annotationProcessor group: 'org.projectlombok', name: 'lombok'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.17'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml'
 }
