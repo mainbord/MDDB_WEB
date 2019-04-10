@@ -4,6 +4,8 @@ import com.mddb.dao.DeviceRepository;
 import com.mddb.domain.Device;
 import com.mddb.loader.DbLoader;
 import com.mddb.loader.PdaDbLoader;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.util.stream.StreamSupport;
  * Created by mainbord on 20.09.17.
  */
 @Service
+@Log4j2(topic = "app")
 public class DbServicesImpl implements DbService {
 
     private final DeviceRepository repository;
@@ -69,6 +72,7 @@ public class DbServicesImpl implements DbService {
                 loader.getDevices()) {
             repository.save(dev);
         }
+        log.info("ALL devices saved");
         return 0;
     }
 }

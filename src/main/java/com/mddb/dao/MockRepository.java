@@ -21,7 +21,7 @@ public class MockRepository {
 //        device.setCpu(new Cpu(2, "ARM", 1700, "ARMV7", 28));
         device.setNumberOfCores(2);
         device.setArchitecture("ARM");
-        device.setMaxFrequencyPerCore(1700);
+        device.setMaxFrequencyPerCore("1700L");
         device.setInstruction("ARMV7");
         device.setManufacturingMethod(28);
         device.setSoc("MSM8960DT");
@@ -43,7 +43,7 @@ public class MockRepository {
 //        device.setCpu(new Cpu(8, "ARM*", 2400, "ARMV8A", 10));
         device.setNumberOfCores(2);
         device.setArchitecture("ARM");
-        device.setMaxFrequencyPerCore(1700);
+        device.setMaxFrequencyPerCore("1700");
         device.setInstruction("ARMV7");
         device.setManufacturingMethod(28);
         device.setSoc("MSM8960DT");
@@ -66,7 +66,7 @@ public class MockRepository {
 //        device.setCpu(new Cpu(8, "ARM", 2500, "ARMV7", 9));
         device.setNumberOfCores(2);
         device.setArchitecture("ARM");
-        device.setMaxFrequencyPerCore(1700);
+        device.setMaxFrequencyPerCore("1700");
         device.setInstruction("ARMV7");
         device.setManufacturingMethod(28);
         device.setSoc("MSM8960DT");

@@ -1,38 +1,26 @@
 package com.mddb.loader;
 
-import com.mddb.dao.DeviceRepository;
 import com.mddb.domain.Device;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by mainbord on 14.11.17.
  */
+@Log4j2(topic = "app")
 public class PdaDbLoader implements DbLoader {
-    private static Logger log = Logger.getLogger("123");
 
     private static final String URL_FORMAT = "http://phonedb.net/index.php?m=device&s=list&filter=%d";
     private static final String URL = "http://phonedb.net/";
-
-    public static void main(String[] args) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy MMM", Locale.ENGLISH);
-        System.out.println(dateFormat.format(new Date()));
-/*        PdaDbLoader loader = new PdaDbLoader();
-        loader.getUrlDevices();
-        loader.getDevices();*/
-    }
 
     private Set<String> urlDevices = new TreeSet<>();
 
@@ -40,6 +28,7 @@ public class PdaDbLoader implements DbLoader {
 
     @Override
     public List<Device> getDevices() {
+        log.trace("Start get devices");
         try {
             for (String url :
                     urlDevices) {
@@ -62,44 +51,61 @@ public class PdaDbLoader implements DbLoader {
                         Element value = el.nextElementSibling();
                         if (!"".equals(key.toString())) {
                             parameteres.put(key.text(), value.text());
-                            System.out.println(key.text() + ": " + value.text());
                         }
                     }
                 }
-                String test = parameteres.get("Brand");
                 Device device = new Device();
+                String paramValue = "";
                 device.setCompanyName(parameteres.get("Brand"));
                 device.setModelName(parameteres.get("Model"));
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy MMM", Locale.ENGLISH);
-                device.setReleaseDate(dateFormat.parse(parameteres.get("Released")));
-                device.setWidth(parameteres.get("Width"));
-                device.setHeight(parameteres.get("Height"));
-                device.setDepth(parameteres.get("Depth"));
-                device.setWeight(parameteres.get("Mass"));
-                device.setOperatingSystem(parameteres.get("Platform"));
-                device.setSoc(parameteres.get("CPU"));
-                device.setRamType(parameteres.get("RAM Type"));
-                device.setRamSize(Integer.valueOf(parameteres.get("RAM Capacity").split(" ")[0]));
-                device.setRom(parameteres.get("Non-volatile Memory Capacity"));
-                device.setDisplayResolution(parameteres.get("Display Resolution"));
-                device.setDisplayDiagonal(parameteres.get("Display Diagonal"));
-                device.setDisplayType(parameteres.get("Display Type"));
-                device.setDisplayColorAmount(Integer.valueOf(parameteres.get("Display Color Depth").split(" ")[0]));
-                device.setGpuControllerName(parameteres.get("Graphical Controller"));
-                device.setSpeaker(parameteres.get("Loudpeaker(s)"));
+                String ssss = parameteres.getOrDefault("Released","1920 jan");
+                device.setReleaseDate(dateFormat.parse( ssss.equalsIgnoreCase("Cancelled") ? "1920 jan" : ssss));
+                device.setWidth(parameteres.getOrDefault("Width",""));
+                device.setHeight(parameteres.getOrDefault("Height",""));
+                device.setDepth(parameteres.getOrDefault("Depth",""));
+                device.setWeight(parameteres.getOrDefault("Mass",""));
+                device.setOperatingSystem(parameteres.getOrDefault("Platform",""));
+                device.setSoc(parameteres.getOrDefault("CPU","").split(",")[0]);
+                device.setMaxFrequencyPerCore(parameteres.getOrDefault("CPU Clock","0").split(" ")[0].replaceAll("/.",","));
+                device.setRamType(parameteres.getOrDefault("RAM Type",""));
+                device.setRamSize((parameteres.getOrDefault("RAM Capacity", "0 0").split(" ")[0]));
+                device.setRom(parameteres.getOrDefault("Non-volatile Memory Capacity",""));
+                device.setDisplayResolution(parameteres.getOrDefault("Display Resolution",""));
+                device.setDisplayDiagonal(parameteres.getOrDefault("Display Diagonal",""));
+                device.setDisplayType(parameteres.getOrDefault("Display Type","unknown"));
+                device.setDisplayColorAmount(Integer.valueOf(parameteres.getOrDefault("Display Color Depth","0 0").split(" ")[0]));
+                device.setGpuControllerName(parameteres.getOrDefault("Graphical Controller",""));
+                device.setSpeaker(parameteres.getOrDefault("Loudpeaker(s)",""));
+                device.setAntenna(parameteres.getOrDefault("Cellular Antenna","").equalsIgnoreCase("Internal antenna") ? "internal" : "external");
+                device.setBluetooth(!parameteres.getOrDefault("Bluetooth","").equalsIgnoreCase("no"));
+                device.setWifi(!parameteres.getOrDefault("Wireless LAN","").equalsIgnoreCase("no"));
+                device.setInfrared(!parameteres.getOrDefault("Infrared","").equalsIgnoreCase("no"));
+                device.setFmReceiver(!parameteres.getOrDefault("FM Radio Receiver","").equalsIgnoreCase("No"));
+                device.setBatteryType(parameteres.getOrDefault("Battery",""));
+                device.setBatteryCapacity(Integer.valueOf(parameteres.getOrDefault("Nominal Battery Capacity","0 0 ").split(" ")[0]));
+                paramValue = parameteres.getOrDefault("Protection from liquids","");
+                device.setWaterProof(paramValue.length() == 0 ? 0 : Character.isDigit(paramValue.charAt(0)) ? (int) paramValue.charAt(0) : 0);
+                paramValue = parameteres.getOrDefault("Protection from solid materials","");
+                device.setDustProof(paramValue.length() == 0 ? 0 : Character.isDigit(paramValue.charAt(0)) ? (int) paramValue.charAt(0) : 0);
+                device.setGyroscope(parameteres.getOrDefault("Built-in gyroscope","").equalsIgnoreCase("yes"));
+                device.setAccelerometer(parameteres.getOrDefault("Built-in accelerometer","").equalsIgnoreCase("yes"));
+                device.setCompass(parameteres.getOrDefault("Built-in compass","").equalsIgnoreCase("yes"));
                 devices.add(device);
 //                break; //test one
             }
         } catch (Exception e) {
-            log.log(Level.WARNING, e.getMessage());
+            log.error(e.getMessage());
             e.printStackTrace();
         }
+        log.info("Devices returned" + devices.size());
         return devices;
     }
 
     public Set<String> getUrlDevices() {
+        log.trace("Start get url devices");
         try {
-            int pageNumber = 12500; //поменять на 0, это для ускорения результатов тестирования
+            int pageNumber = 8000; //поменять на 0, это для ускорения результатов тестирования
             Document doc;
             while (true) {
                 TimeUnit.MILLISECONDS.sleep(new Random(100).nextInt());
@@ -141,16 +147,16 @@ public class PdaDbLoader implements DbLoader {
                 pageNumber += 58 * 10;
             }
         } catch (Exception e) {
-            log.log(Level.WARNING, e.getMessage());
+            log.error(e.getMessage());
             e.printStackTrace();
         }
+        log.info("url Devices returned" + urlDevices.size());
         return urlDevices;
     }
 
     protected Document getDocument(int page) throws IOException {
 
         String url = String.format(URL_FORMAT, page);
-/*        String url = URL_FORMAT;*/
         Document document =
                 Jsoup.connect(url)
                         .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36")
