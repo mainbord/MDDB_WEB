@@ -7,7 +7,7 @@ Configuration:
     -
       name: app
       fileName: applogs/mddb/app.log
-      filePattern: "applogs/lk_b2b/archive/app-%d{MM-dd-yy}-%i.log.gz"
+      filePattern: "applogs/mddb/archive/app-%d{MM-dd-yy}-%i.log.gz"
       PatternLayout:
         pattern: "[%d{ISO8601}][%mdc{sessionId}][%t][%1p][%c{1}][%m]%n"
       Policies:
