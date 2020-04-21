@@ -1,7 +1,8 @@
-package com.mddb.service;
+package com.mddb.usecase;
 
 import com.mddb.dao.DeviceRepository;
 import com.mddb.domain.Device;
+import com.mddb.usecase.impl.DeviceServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -19,13 +20,13 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.class)
-class DbServicesImplTest {
+class DeviceServiceImplTest {
 
     @Mock
     private DeviceRepository repository;
 
     @InjectMocks
-    private DbServicesImpl service;
+    private DeviceServiceImpl service;
 
     @Test
     public void getDevice() {

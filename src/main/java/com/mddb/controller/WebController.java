@@ -1,7 +1,7 @@
 package com.mddb.controller;
 
 import com.mddb.domain.Device;
-import com.mddb.service.DbService;
+import com.mddb.usecase.DeviceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Log4j2(topic = "app")
 public class WebController {
 
-    private final DbService service;
+    private final DeviceService service;
 
     @RequestMapping(value = "/index",
             method = RequestMethod.GET)

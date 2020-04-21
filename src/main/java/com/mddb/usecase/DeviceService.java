@@ -1,4 +1,4 @@
-package com.mddb.service;
+package com.mddb.usecase;
 
 import com.mddb.domain.Device;
 
@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by mainbord on 20.09.17.
  */
-public interface DbService {
+public interface DeviceService {
 
     List<Device> getDevices();
 
@@ -19,5 +19,4 @@ public interface DbService {
 
     Device getDevice(Long id);
 
-    int saveDevices();
 }

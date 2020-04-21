@@ -1,7 +1,8 @@
-package com.mddb.service;
+package com.mddb.usecase.impl;
 
 import com.mddb.dao.MockRepository;
 import com.mddb.domain.Device;
+import com.mddb.usecase.DeviceService;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Set;
 /**
  * Created by mainbord on 07.11.17.
  */
-public class DBServiceMock implements DbService {
+public class DeviceServiceMock implements DeviceService {
 
     private final MockRepository repository = new MockRepository();
 
@@ -34,8 +35,4 @@ public class DBServiceMock implements DbService {
         return repository.getDevice(id);
     }
 
-    @Override
-    public int saveDevices() {
-        return 0;
-    }
 }

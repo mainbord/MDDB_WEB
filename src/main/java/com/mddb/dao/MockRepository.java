@@ -98,7 +98,7 @@ public class MockRepository {
     public Set<String> getCompaniesNames(){
         return devices.stream()
                 .map(Device::getCompanyName)
-                .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.naturalOrder())));
+                .collect(Collectors.toSet());
     }
 
     public Device getDevice(Long id){
