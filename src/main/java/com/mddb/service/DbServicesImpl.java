@@ -5,7 +5,6 @@ import com.mddb.domain.Device;
 import com.mddb.loader.DbLoader;
 import com.mddb.loader.PdaDbLoader;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,7 @@ public class DbServicesImpl implements DbService {
     }
 
     @Override
-    public Iterable<Device> getDevices() {
+    public List<Device> getDevices() {
         return repository.findAll();
 
     }
@@ -41,11 +40,11 @@ public class DbServicesImpl implements DbService {
                         Spliterator.ORDERED),
                 false)
                 .map(Device::getCompanyName)
-                .collect(Collectors.toCollection(() -> new TreeSet<String>(Comparator.naturalOrder())));
+                .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.naturalOrder())));
     }
 
     @Override
-    public Map<Integer, String> getDevicesByCompany(String company) {
+    public Map<Long, String> getDevicesByCompany(String company) {
         repository.findAll();
 
         return repository.findByCompanyName(company).stream()
@@ -54,14 +53,8 @@ public class DbServicesImpl implements DbService {
 
 
     @Override
-    public Device getDevice(Integer id) {
-        for (Device dev :
-                getDevices()) {
-            if (dev.getId() == id) {
-                return dev;
-            }
-        }
-        return null;
+    public Device getDevice(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override

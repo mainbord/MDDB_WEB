@@ -6,6 +6,8 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
+
 /**
  * Created by mainbord on 07.11.17.
  */
@@ -15,7 +17,7 @@ public class MockRepository {
 
     static {
         Device device = new Device();
-        device.setId(1);
+        device.setId(1L);
         device.setCompanyName("Motorola");
         device.setModelName("Droid Mini");
 //        device.setCpu(new Cpu(2, "ARM", 1700, "ARMV7", 28));
@@ -37,7 +39,7 @@ public class MockRepository {
         devices.add(device);
 
         device = new Device();
-        device.setId(2);
+        device.setId(2L);
         device.setCompanyName("Samsung");
         device.setModelName("Galaxy S7");
 //        device.setCpu(new Cpu(8, "ARM*", 2400, "ARMV8A", 10));
@@ -60,7 +62,7 @@ public class MockRepository {
         devices.add(device);
 
         device = new Device();
-        device.setId(3);
+        device.setId(3L);
         device.setCompanyName("Sony");
         device.setModelName("XZ1 Compact");
 //        device.setCpu(new Cpu(8, "ARM", 2500, "ARMV7", 9));
@@ -83,7 +85,7 @@ public class MockRepository {
         devices.add(device);
     }
 
-    public Map<Integer, String> findByCompanyName(String company){
+    public Map<Long, String> findByCompanyName(String company){
         return devices.stream()
                 .filter(dev -> dev.getCompanyName().equals(company))
                 .collect(Collectors.toMap(Device::getId, Device::getModelName));
@@ -96,13 +98,14 @@ public class MockRepository {
     public Set<String> getCompaniesNames(){
         return devices.stream()
                 .map(Device::getCompanyName)
-                .collect(Collectors.toCollection(() -> new TreeSet<String>(Comparator.naturalOrder())));
+                .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.naturalOrder())));
     }
 
-    public Device getDevice(Integer id){
+    public Device getDevice(Long id){
+        if (isNull(id)) return null;
         for (Device dev :
                 devices) {
-            if (dev.getId() == id){
+            if (dev.getId().equals(id)){
                 return dev;
             }
         }

@@ -11,13 +11,13 @@ import java.util.Set;
  */
 public interface DbService {
 
-    public Iterable<Device> getDevices();
+    List<Device> getDevices();
 
-    public Set<String> getCompaniesNames();
+    Set<String> getCompaniesNames();
 
-    public Map<Integer, String> getDevicesByCompany(String company);
+    Map<Long, String> getDevicesByCompany(String company);
 
-    public Device getDevice(Integer id);
+    Device getDevice(Long id);
 
-    public int saveDevices();
+    int saveDevices();
 }

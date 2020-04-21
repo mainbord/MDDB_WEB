@@ -46,7 +46,7 @@ public class WebController {
     @RequestMapping(value = "/device/{id}",
             method = RequestMethod.GET)
     public String getDevice(
-            @PathVariable Integer id,
+            @PathVariable Long id,
             Map<String, Object> model,
             Locale locale) {
         Device dev = service.getDevice(id);

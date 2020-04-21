@@ -1,10 +1,7 @@
 package com.mddb.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -15,164 +12,166 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Device {
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    Long id;
 
     @Column(name = "RELEASE_DATE")
     @Temporal(TemporalType.DATE)
-    private Date releaseDate;
+    Date releaseDate;
 
     @Column(name = "COMPANY_NAME")
-    private String companyName;
+    String companyName;
 
     @Column(name = "MODEL_NAME")
-    private String modelName;
+    String modelName;
 
     @Column(name = "OPERATING_SYSTEM")
-    private String operatingSystem;
+    String operatingSystem;
 
     @Column(name = "FORM_FACTOR")
-    private String formFactor;
+    String formFactor;
 
     @Column (name = "WIDTH")
-    private String width;
+    String width;
 
     @Column (name = "HEIGHT")
-    private String height;
+    String height;
 
     @Column (name = "DEPTH")
-    private String depth;
+    String depth;
 
     @Column (name = "WEIGHT")
-    private String weight;
+    String weight;
 
     @Column (name = "BODY_MATERIAL")
-    private String bodyMaterial;
+    String bodyMaterial;
 
     @Column (name = "BODY_COLOR")
-    private String bodyColor;
+    String bodyColor;
 
     @Column (name = "WATER_PROOF")
-    private Integer waterProof;
+    Integer waterProof;
 
     @Column (name = "DUST_PROOF")
-    private Integer dustProof;
+    Integer dustProof;
 
     @Column (name = "CRASH_WORTHINESS")
-    private Boolean crashWorthiness;
+    Boolean crashWorthiness;
 
     @Column (name = "PACKAGING")
-    private String packaging;
+    String packaging;
 
     @Column (name = "SOC")
-    private String soc;
+    String soc;
 
-//    private Cpu cpu;
+//    Cpu cpu;
     @Column(name = "CPU_NUMBER_OF_CORES")
-    private Integer numberOfCores;
+    Integer numberOfCores;
 
     @Column(name = "CPU_ARCHITECTURE")
-    private String architecture;
+    String architecture;
 
     @Column(name = "CPU_MAX_FREQUENCY_PER_CORE")
-    private String maxFrequencyPerCore; //MHZ
+    String maxFrequencyPerCore; //MHZ
 
     @Column(name = "CPU_INSTRUCTION")
-    private String instruction;
+    String instruction;
 
     @Column(name = "CPU_MANUFACTURING_METHOD")
-    private Integer manufacturingMethod; //nm
+    Integer manufacturingMethod; //nm
 
-//    private GraphicalController graphicalController;
+//    GraphicalController graphicalController;
     @Column(name = "GRAPHICAL_CONTROLLER_NAME")
-    private String gpuControllerName;
+    String gpuControllerName;
 
     @Column(name = "GRAPHICAL_CONTROLLER_GPU_CLOCK")
-    private Integer gpuClock; // MHZ
+    Integer gpuClock; // MHZ
 
-//    private Ram ram;
+//    Ram ram;
     @Column(name = "RAM_SIZE")
-    private String ramSize; //mb 1024
+    String ramSize; //mb 1024
 
     @Column(name = "RAM_TYPE")
-    private String ramType; //LPDDR2
+    String ramType; //LPDDR2
 
     @Column(name = "RAM_CLOCK")
-    private Integer ramClock; //MHZ
+    Integer ramClock; //MHZ
 
     @Column (name = "ROM")
-    private String rom;
+    String rom;
 
     @Column (name = "SOUND_CONTROLLER")
-    private String soundController;
+    String soundController;
 
     @Column (name = "BATTERY_TYPE")
-    private String batteryType;
+    String batteryType;
 
     @Column (name = "BATTERY_CAPACITY")
-    private Integer batteryCapacity;
+    Integer batteryCapacity;
 
     @Column (name = "GPS")
-    private String gps;
+    String gps;
 
     @Column (name = "FM_RECEIVER")
-    private Boolean fmReceiver;
+    Boolean fmReceiver;
 
     @Column (name = "FM_TRANSMITTER")
-    private Boolean fmTransmitter;
+    Boolean fmTransmitter;
 
     @Column (name = "WIRELESS_CHARGER")
-    private String wirelessCharger;
+    String wirelessCharger;
 
     @Column (name = "ANTENNA")
-    private String antenna;
+    String antenna;
 
     @Column (name = "VIBRATION")
     @Type(type= "org.hibernate.type.NumericBooleanType")
-    private Boolean vibration;
+    Boolean vibration;
 
     @Column (name = "LED_NOTIFICATION")
-    private String ledNotification;
+    String ledNotification;
 
     @Column (name = "SPEAKER")
-    private String speaker;
+    String speaker;
 
-//    private Display display;
+//    Display display;
     @Column(name = "DISPLAY_DIAGONAL")
-    private String displayDiagonal;
+    String displayDiagonal;
 
     @Column(name = "DISPLAY_RESOLUTION")
-    private String displayResolution;
+    String displayResolution;
 
     @Column(name = "DISPLAY_TYPE")
 //    @Enumerated(EnumType.STRING)
-    private String displayType;
+    String displayType;
 
     @Column(name = "DISPLAY_RATIO")
-    private String displayRatio; //по идее должен вычисляться из других параметров
+    String displayRatio; //по идее должен вычисляться из других параметров
 
     @Column(name = "DISPLAY_COLOR_AMOUNT")
-    private Integer displayColorAmount;
+    Integer displayColorAmount;
 
     @Column(name = "DISPLAY_SENSOR_TYPE")
 //    @Enumerated(EnumType.STRING)
-    private String displaySensorType;
+    String displaySensorType;
 
     @Column(name = "DISPLAY_MULTITOUCH")
-    private Integer displayMultitouch;
+    Integer displayMultitouch;
 
     @Column(name = "DISPLAY_GLASS_DESCRIPTION")
-    private String displayGlassDescription;
+    String displayGlassDescription;
 
     @Column(name = "DISPLAY_GLARE_FILTER")
-    private Boolean displayGlareFilter;
+    Boolean displayGlareFilter;
 
     @Column(name = "DISPLAY_OLEOPHOBIC")
-    private Boolean displayOleophobic;
+    Boolean displayOleophobic;
 
     public enum displayType {
         LCD, AMOLED
@@ -183,148 +182,148 @@ public class Device {
     }
 
     @Column(name = "SMS")
-    private Boolean sms;
+    Boolean sms;
 
     @Column(name = "MMS")
-    private Boolean mms;
+    Boolean mms;
 
     @Column(name = "EMAIL")
-    private Boolean email;
+    Boolean email;
 
     @Column(name = "GSM")
-    private Boolean gsm;
+    Boolean gsm;
 
     @Column(name = "GPRS")
-    private Boolean gprs;
+    Boolean gprs;
 
     @Column(name = "EdGE")
-    private Boolean edge;
+    Boolean edge;
 
     @Column(name = "UMTS")
-    private Boolean umts;
+    Boolean umts;
 
     @Column(name = "HSPA")
-    private Boolean hspa;
+    Boolean hspa;
 
     @Column(name = "LTE")
-    private Boolean lte;
+    Boolean lte;
 
     @Column(name = "CDMA")
-    private Boolean cdma;
+    Boolean cdma;
 
     @Column(name = "BLUETOOTH")
-    private Boolean Bluetooth;
+    Boolean Bluetooth;
 
     @Column(name = "WIFI")
-    private Boolean wifi;
+    Boolean wifi;
 
     @Column(name = "INFRARED")
-    private Boolean infrared;
+    Boolean infrared;
 
     @Column(name = "GYROSCOPE")
-    private Boolean gyroscope;
+    Boolean gyroscope;
 
     @Column(name = "ACCELEROMETER")
-    private Boolean accelerometer;
+    Boolean accelerometer;
 
     @Column(name = "COMPASS")
-    private Boolean compass;
+    Boolean compass;
 
     @Column(name = "PULSOMETER")
-    private boolean pulsometer;
+    Boolean pulsometer;
 
     @Column(name = "ULTRA_VIOLET_SENSOR")
-    private Boolean ultraVioletSensor;
+    Boolean ultraVioletSensor;
 
     @Column(name = "PROXIMITY_SENSOR")
-    private Boolean proximitySensor;
+    Boolean proximitySensor;
 
     @Column(name = "LUMINANCE_SENSOR")
-    private Boolean luminanceSensor;
+    Boolean luminanceSensor;
 
     @Column(name = "BAROMETER")
-    private Boolean barometer;
+    Boolean barometer;
 
     @Column(name = "TEMERATURE_BATTERY_SENSOR")
-    private Boolean temeratureBatterySensor;
+    Boolean temeratureBatterySensor;
 
     @Column(name = "FINGERPRINT_SENSOR")
-    private Boolean fingerprintSensor;
+    Boolean fingerprintSensor;
 
     @Column(name = "PEDOMETER_SENSOR")
-    private Boolean pedometerSensor;
+    Boolean pedometerSensor;
 
     @Column(name = "GAME_ROTATION_VECTOR")
-    private Boolean gameRotationVector;
+    Boolean gameRotationVector;
 
     @Column(name = "GEOMAGNETIC_ROTATION_VECTOR")
-    private Boolean geomagneticRotationVector;
+    Boolean geomagneticRotationVector;
 
     @Column(name = "SIGNIFICANT_MOTION_DETECTOR")
-    private Boolean significantMotionDetector;
+    Boolean significantMotionDetector;
 
     @Column(name = "HOLL_SENSOR")
-    private Boolean hollSensor;
+    Boolean hollSensor;
 
     @Column(name = "TRS_35")
-    private Boolean trs35;
+    Boolean trs35;
 
     @Column(name = "VoLTE")
-    private Boolean voLte;
+    Boolean voLte;
 
     @Column(name = "VIDEO_CALL")
-    private Boolean videoCall;
+    Boolean videoCall;
 
     @Column(name = "WIFI_Direct")
-    private Boolean wifiDirect;
+    Boolean wifiDirect;
 
     @Column(name = "WIFI_HOTSPOT")
-    private Boolean wifiHotspot;
+    Boolean wifiHotspot;
 
     @Column(name = "DLNA")
-    private Boolean dlna;
+    Boolean dlna;
 
     @Column(name = "MIRACAST")
-    private Boolean miracast;
+    Boolean miracast;
 
     @Column(name = "Bluetooth_LE")
-    private Boolean bluetoothLe;
+    Boolean bluetoothLe;
 
     @Column(name = "ANT_PLUS")
-    private Boolean antPlus;
+    Boolean antPlus;
 
     @Column(name = "NFC")
-    private Boolean nfc;
+    Boolean nfc;
 
     @Column(name = "MILFARE")
-    private Boolean milfare;
+    Boolean milfare;
 
     @Column(name = "NFCPAYMENTS")
-    private Boolean nfcPayments;
+    Boolean nfcPayments;
 
     @Column(name = "SECUREELEMET_PAYMENTS")
-    private Boolean secureelemetPayments;
+    Boolean secureelemetPayments;
 
     @Column(name = "IRDA")
-    private Boolean irda;
+    Boolean irda;
 
     @Column(name = "MHL")
-    private Boolean mhl;
+    Boolean mhl;
 
     @Column(name = "VIDEO_EXIT_TO_DISPLAY_PORT")
-    private Boolean videoExitDisplayPort;
+    Boolean videoExitDisplayPort;
 
     @Column(name = "SLIMPORT")
-    private Boolean slimport;
+    Boolean slimport;
 
     @Column(name = "USB")
-    private Boolean usb;
+    Boolean usb;
 
     @Column(name = "USB_HOST")
-    private Boolean usbHost;
+    Boolean usbHost;
 
     @Column(name = "USB_TETHERING")
-    private Boolean usbTethering;
+    Boolean usbTethering;
 
 /*    - HSPA+, HSDPA категории 24 (скорость до 42 Мбит/с), HSUPA категории 6 (скорость до 5,8 Мбит/с)
     - LTE диапазоны/band 1, 2, 3, 4, 5, 7, 8, 12, 17, 19, 20, 26, 28, 38, 39, 40, 41 (700, 800, 850, 900, 1700, 1800, 1900, 2100, 2300, 2500, 2600 МГц) 15 категории, скорость до 800 Мбит/с к себе и до неизвестно Мбит/с от себя, MIMO 2x2
@@ -446,392 +445,4 @@ public class Device {
 - голосовое управление
 - активные уведомления*/
 
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
-    public void setOperatingSystem(String operatingSystem) {
-        this.operatingSystem = operatingSystem;
-    }
-
-    public void setFormFactor(String formFactor) {
-        this.formFactor = formFactor;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public void setDepth(String depth) {
-        this.depth = depth;
-    }
-
-    public void setWeight(String weight) {
-        this.weight = weight;
-    }
-
-    public void setBodyMaterial(String bodyMaterial) {
-        this.bodyMaterial = bodyMaterial;
-    }
-
-    public void setBodyColor(String bodyColor) {
-        this.bodyColor = bodyColor;
-    }
-
-    public void setWaterProof(Integer waterProof) {
-        this.waterProof = waterProof;
-    }
-
-    public void setDustProof(Integer dustProof) {
-        this.dustProof = dustProof;
-    }
-
-    public void setCrashWorthiness(Boolean crashWorthiness) {
-        this.crashWorthiness = crashWorthiness;
-    }
-
-    public void setPackaging(String packaging) {
-        this.packaging = packaging;
-    }
-
-    public void setSoc(String soc) {
-        this.soc = soc;
-    }
-
-    public void setNumberOfCores(Integer numberOfCores) {
-        this.numberOfCores = numberOfCores;
-    }
-
-    public void setArchitecture(String architecture) {
-        this.architecture = architecture;
-    }
-
-    public void setMaxFrequencyPerCore(String maxFrequencyPerCore) {
-        this.maxFrequencyPerCore = maxFrequencyPerCore;
-    }
-
-    public void setInstruction(String instruction) {
-        this.instruction = instruction;
-    }
-
-    public void setManufacturingMethod(Integer manufacturingMethod) {
-        this.manufacturingMethod = manufacturingMethod;
-    }
-
-    public void setGpuControllerName(String gpuControllerName) {
-        this.gpuControllerName = gpuControllerName;
-    }
-
-    public void setGpuClock(Integer gpuClock) {
-        this.gpuClock = gpuClock;
-    }
-
-    public void setRamSize(String ramSize) {
-        this.ramSize = ramSize;
-    }
-
-    public void setRamType(String ramType) {
-        this.ramType = ramType;
-    }
-
-    public void setRamClock(Integer ramClock) {
-        this.ramClock = ramClock;
-    }
-
-    public void setRom(String rom) {
-        this.rom = rom;
-    }
-
-    public void setSoundController(String soundController) {
-        this.soundController = soundController;
-    }
-
-    public void setBatteryType(String batteryType) {
-        this.batteryType = batteryType;
-    }
-
-    public void setBatteryCapacity(Integer batteryCapacity) {
-        this.batteryCapacity = batteryCapacity;
-    }
-
-    public void setGps(String gps) {
-        this.gps = gps;
-    }
-
-    public void setFmReceiver(Boolean fmReceiver) {
-        this.fmReceiver = fmReceiver;
-    }
-
-    public void setFmTransmitter(Boolean fmTransmitter) {
-        this.fmTransmitter = fmTransmitter;
-    }
-
-    public void setWirelessCharger(String wirelessCharger) {
-        this.wirelessCharger = wirelessCharger;
-    }
-
-    public void setAntenna(String antenna) {
-        this.antenna = antenna;
-    }
-
-    public void setVibration(Boolean vibration) {
-        this.vibration = vibration;
-    }
-
-    public void setLedNotification(String ledNotification) {
-        this.ledNotification = ledNotification;
-    }
-
-    public void setSpeaker(String speaker) {
-        this.speaker = speaker;
-    }
-
-    public void setDisplayDiagonal(String displayDiagonal) {
-        this.displayDiagonal = displayDiagonal;
-    }
-
-    public void setDisplayResolution(String displayResolution) {
-        this.displayResolution = displayResolution;
-    }
-
-    public void setDisplayType(String displayType) {
-        this.displayType = displayType;
-    }
-
-    public void setDisplayRatio(String displayRatio) {
-        this.displayRatio = displayRatio;
-    }
-
-    public void setDisplayColorAmount(Integer displayColorAmount) {
-        this.displayColorAmount = displayColorAmount;
-    }
-
-    public void setDisplaySensorType(String displaySensorType) {
-        this.displaySensorType = displaySensorType;
-    }
-
-    public void setDisplayMultitouch(Integer displayMultitouch) {
-        this.displayMultitouch = displayMultitouch;
-    }
-
-    public void setDisplayGlassDescription(String displayGlassDescription) {
-        this.displayGlassDescription = displayGlassDescription;
-    }
-
-    public void setDisplayGlareFilter(Boolean displayGlareFilter) {
-        this.displayGlareFilter = displayGlareFilter;
-    }
-
-    public void setDisplayOleophobic(Boolean displayOleophobic) {
-        this.displayOleophobic = displayOleophobic;
-    }
-
-    public void setSms(Boolean sms) {
-        this.sms = sms;
-    }
-
-    public void setMms(Boolean mms) {
-        this.mms = mms;
-    }
-
-    public void setEmail(Boolean email) {
-        this.email = email;
-    }
-
-    public void setGsm(Boolean gsm) {
-        this.gsm = gsm;
-    }
-
-    public void setGprs(Boolean gprs) {
-        this.gprs = gprs;
-    }
-
-    public void setEdge(Boolean edge) {
-        this.edge = edge;
-    }
-
-    public void setUmts(Boolean umts) {
-        this.umts = umts;
-    }
-
-    public void setHspa(Boolean hspa) {
-        this.hspa = hspa;
-    }
-
-    public void setLte(Boolean lte) {
-        this.lte = lte;
-    }
-
-    public void setCdma(Boolean cdma) {
-        this.cdma = cdma;
-    }
-
-    public void setBluetooth(Boolean bluetooth) {
-        Bluetooth = bluetooth;
-    }
-
-    public void setWifi(Boolean wifi) {
-        this.wifi = wifi;
-    }
-
-    public void setInfrared(Boolean infrared) {
-        this.infrared = infrared;
-    }
-
-    public void setGyroscope(Boolean gyroscope) {
-        this.gyroscope = gyroscope;
-    }
-
-    public void setAccelerometer(Boolean accelerometer) {
-        this.accelerometer = accelerometer;
-    }
-
-    public void setCompass(Boolean compass) {
-        this.compass = compass;
-    }
-
-    public void setPulsometer(boolean pulsometer) {
-        this.pulsometer = pulsometer;
-    }
-
-    public void setUltraVioletSensor(Boolean ultraVioletSensor) {
-        this.ultraVioletSensor = ultraVioletSensor;
-    }
-
-    public void setProximitySensor(Boolean proximitySensor) {
-        this.proximitySensor = proximitySensor;
-    }
-
-    public void setLuminanceSensor(Boolean luminanceSensor) {
-        this.luminanceSensor = luminanceSensor;
-    }
-
-    public void setBarometer(Boolean barometer) {
-        this.barometer = barometer;
-    }
-
-    public void setTemeratureBatterySensor(Boolean temeratureBatterySensor) {
-        this.temeratureBatterySensor = temeratureBatterySensor;
-    }
-
-    public void setFingerprintSensor(Boolean fingerprintSensor) {
-        this.fingerprintSensor = fingerprintSensor;
-    }
-
-    public void setPedometerSensor(Boolean pedometerSensor) {
-        this.pedometerSensor = pedometerSensor;
-    }
-
-    public void setGameRotationVector(Boolean gameRotationVector) {
-        this.gameRotationVector = gameRotationVector;
-    }
-
-    public void setGeomagneticRotationVector(Boolean geomagneticRotationVector) {
-        this.geomagneticRotationVector = geomagneticRotationVector;
-    }
-
-    public void setSignificantMotionDetector(Boolean significantMotionDetector) {
-        this.significantMotionDetector = significantMotionDetector;
-    }
-
-    public void setHollSensor(Boolean hollSensor) {
-        this.hollSensor = hollSensor;
-    }
-
-    public void setTrs35(Boolean trs35) {
-        this.trs35 = trs35;
-    }
-
-    public void setVoLte(Boolean voLte) {
-        this.voLte = voLte;
-    }
-
-    public void setVideoCall(Boolean videoCall) {
-        this.videoCall = videoCall;
-    }
-
-    public void setWifiDirect(Boolean wifiDirect) {
-        this.wifiDirect = wifiDirect;
-    }
-
-    public void setWifiHotspot(Boolean wifiHotspot) {
-        this.wifiHotspot = wifiHotspot;
-    }
-
-    public void setDlna(Boolean dlna) {
-        this.dlna = dlna;
-    }
-
-    public void setMiracast(Boolean miracast) {
-        this.miracast = miracast;
-    }
-
-    public void setBluetoothLe(Boolean bluetoothLe) {
-        this.bluetoothLe = bluetoothLe;
-    }
-
-    public void setAntPlus(Boolean antPlus) {
-        this.antPlus = antPlus;
-    }
-
-    public void setNfc(Boolean nfc) {
-        this.nfc = nfc;
-    }
-
-    public void setMilfare(Boolean milfare) {
-        this.milfare = milfare;
-    }
-
-    public void setNfcPayments(Boolean nfcPayments) {
-        this.nfcPayments = nfcPayments;
-    }
-
-    public void setSecureelemetPayments(Boolean secureelemetPayments) {
-        this.secureelemetPayments = secureelemetPayments;
-    }
-
-    public void setIrda(Boolean irda) {
-        this.irda = irda;
-    }
-
-    public void setMhl(Boolean mhl) {
-        this.mhl = mhl;
-    }
-
-    public void setVideoExitDisplayPort(Boolean videoExitDisplayPort) {
-        this.videoExitDisplayPort = videoExitDisplayPort;
-    }
-
-    public void setSlimport(Boolean slimport) {
-        this.slimport = slimport;
-    }
-
-    public void setUsb(Boolean usb) {
-        this.usb = usb;
-    }
-
-    public void setUsbHost(Boolean usbHost) {
-        this.usbHost = usbHost;
-    }
-
-    public void setUsbTethering(Boolean usbTethering) {
-        this.usbTethering = usbTethering;
-    }
 }

@@ -3,6 +3,7 @@ package com.mddb.service;
 import com.mddb.dao.MockRepository;
 import com.mddb.domain.Device;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public class DBServiceMock implements DbService {
     private final MockRepository repository = new MockRepository();
 
     @Override
-    public Iterable<Device> getDevices() {
+    public List<Device> getDevices() {
         return repository.findAll();
     }
 
@@ -24,12 +25,12 @@ public class DBServiceMock implements DbService {
     }
 
     @Override
-    public Map<Integer, String> getDevicesByCompany(String company) {
+    public Map<Long, String> getDevicesByCompany(String company) {
         return repository.findByCompanyName(company);
     }
 
     @Override
-    public Device getDevice(Integer id) {
+    public Device getDevice(Long id) {
         return repository.getDevice(id);
     }
 

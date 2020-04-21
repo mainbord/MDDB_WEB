@@ -22,9 +22,9 @@ public class PdaDbLoader implements DbLoader {
     private static final String URL_FORMAT = "http://phonedb.net/index.php?m=device&s=list&filter=%d";
     private static final String URL = "http://phonedb.net/";
 
-    private Set<String> urlDevices = new TreeSet<>();
+    private final Set<String> urlDevices = new TreeSet<>();
 
-    private List<Device> devices = new ArrayList<>();
+    private final List<Device> devices = new ArrayList<>();
 
     @Override
     public List<Device> getDevices() {
@@ -111,7 +111,7 @@ public class PdaDbLoader implements DbLoader {
                 TimeUnit.MILLISECONDS.sleep(new Random(100).nextInt());
                 doc = getDocument(pageNumber);
                 if (doc == null) break;
-                Elements elements = doc.select("div.content_block_title");
+                Elements elements = doc.getElementsByClass("content_block_title");
                 if (elements.size() == 0) break;
 
                 for (Element element : elements) {
@@ -155,14 +155,10 @@ public class PdaDbLoader implements DbLoader {
     }
 
     protected Document getDocument(int page) throws IOException {
-
         String url = String.format(URL_FORMAT, page);
-        Document document =
-                Jsoup.connect(url)
-                        .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36")
-                        .referrer("none")
-                        .get();
-
-        return document;
+        return Jsoup.connect(url)
+                .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36")
+                .referrer("none")
+                .get();
     }
 }

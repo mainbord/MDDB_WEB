@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.4.RELEASE'
+        springBootVersion = '2.1.11.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -10,21 +10,22 @@ buildscript {
     }
 }
 
-
-group 'com.mainbord'
+group 'mcorp'
 version '1.0.0'
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
 configurations {
+    providedRuntime
     implementation.exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
 }
 
@@ -36,9 +37,25 @@ dependencies {
     implementation group: 'javax.servlet', name: 'jstl'
 
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.11.1'
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    implementation group: 'org.projectlombok', name: 'lombok'
+    compileOnly group: 'org.projectlombok', name: 'lombok'
     annotationProcessor group: 'org.projectlombok', name: 'lombok'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.17'
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation('org.junit.jupiter:junit-jupiter-api')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
+    testRuntimeOnly('org.junit.vintage:junit-vintage-engine')
+    testImplementation('org.junit.platform:junit-platform-commons')
+    testCompile group: 'org.mockito', name: 'mockito-junit-jupiter'
+    testCompile group: 'org.mockito', name: 'mockito-core'
+
+}
+
+test{
+    useJUnitPlatform()
+    dependsOn 'cleanTest'
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
