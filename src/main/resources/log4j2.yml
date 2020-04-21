@@ -36,7 +36,7 @@ Configuration:
         ref: app
     -
       name: console
-      level: error
+      level: INFO
       additivity: false
       AppenderRef:
         ref: app
