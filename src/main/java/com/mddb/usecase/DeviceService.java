@@ -1,6 +1,7 @@
 package com.mddb.usecase;
 
 import com.mddb.domain.Device;
+import com.mddb.dto.DeviceDto;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.Set;
  */
 public interface DeviceService {
 
-    List<Device> getDevices();
+    List<DeviceDto> getDevices(Integer pageNumber, Integer pageSize);
 
     Set<String> getCompaniesNames();
 

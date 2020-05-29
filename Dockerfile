@@ -1,4 +1,4 @@
-FROM adoptopenjdk:14-jre-hotspot
+FROM openjdk:14-jre
 
 ARG ARTIFACT
 ENV JAR_FILE $ARTIFACT

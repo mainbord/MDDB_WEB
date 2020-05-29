@@ -2,6 +2,7 @@ package com.mddb.dao;
 
 import com.mddb.domain.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by mainbord on 29.10.17.
  */
-public interface DeviceRepository extends JpaRepository<Device, Long> {
+public interface DeviceRepository extends JpaRepository<Device, Long>, JpaSpecificationExecutor<Device> {
 
     List<Device> findByReleaseDate(Date date);
 
