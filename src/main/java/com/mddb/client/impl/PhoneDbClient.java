@@ -49,7 +49,7 @@ public class PhoneDbClient implements DeviceClient {
                         Element key = el.select(("strong")).get(0);
                         Element value = el.nextElementSibling();
                         if (!"".equals(key.toString())) {
-                            params.put(key.text(), value.text());
+                            params.put(key.text(), value == null ? null : value.text());
                         }
                     }
                 }

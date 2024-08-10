@@ -1,10 +1,11 @@
 package com.mddb.domain;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+
 import java.util.Date;
 
 @Entity
@@ -19,7 +20,7 @@ public class Device {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    Integer id;
 
     @Column(name = "RELEASE_DATE")
     @Temporal(TemporalType.DATE)
@@ -131,7 +132,7 @@ public class Device {
     String antenna;
 
     @Column (name = "VIBRATION")
-    @Type(type= "org.hibernate.type.NumericBooleanType")
+//    @Type(value= "org.hibernate.type.NumericBooleanType")
     Boolean vibration;
 
     @Column (name = "LED_NOTIFICATION")

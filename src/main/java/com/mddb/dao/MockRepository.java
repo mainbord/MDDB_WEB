@@ -17,7 +17,7 @@ public class MockRepository {
 
     static {
         Device device = new Device();
-        device.setId(1L);
+        device.setId(1);
         device.setCompanyName("Motorola");
         device.setModelName("Droid Mini");
 //        device.setCpu(new Cpu(2, "ARM", 1700, "ARMV7", 28));
@@ -39,7 +39,7 @@ public class MockRepository {
         devices.add(device);
 
         device = new Device();
-        device.setId(2L);
+        device.setId(2);
         device.setCompanyName("Samsung");
         device.setModelName("Galaxy S7");
 //        device.setCpu(new Cpu(8, "ARM*", 2400, "ARMV8A", 10));
@@ -62,7 +62,7 @@ public class MockRepository {
         devices.add(device);
 
         device = new Device();
-        device.setId(3L);
+        device.setId(3);
         device.setCompanyName("Sony");
         device.setModelName("XZ1 Compact");
 //        device.setCpu(new Cpu(8, "ARM", 2500, "ARMV7", 9));
@@ -85,7 +85,7 @@ public class MockRepository {
         devices.add(device);
     }
 
-    public Map<Long, String> findByCompanyName(String company){
+    public Map<Integer, String> findByCompanyName(String company){
         return devices.stream()
                 .filter(dev -> dev.getCompanyName().equals(company))
                 .collect(Collectors.toMap(Device::getId, Device::getModelName));

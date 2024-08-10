@@ -16,7 +16,7 @@ public interface DeviceService {
 
     Set<String> getCompaniesNames();
 
-    Map<Long, String> getDevicesByCompany(String company);
+    Map<Integer, String> getDevicesByCompany(String company);
 
     Device getDevice(Long id);
 
