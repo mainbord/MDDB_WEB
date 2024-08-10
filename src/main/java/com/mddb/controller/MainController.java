@@ -34,8 +34,8 @@ public class MainController {
 //    }
 
     @GetMapping(value = "/phones")
-    public ResponseEntity<List<DeviceDto>> getDevices(@RequestParam Integer pageNumber,
-                                                      @RequestParam Integer pageSize) {
+    public ResponseEntity<List<DeviceDto>> getDevices(@RequestParam(name = "pageNumber", required = false) Integer pageNumber,
+                                                      @RequestParam(name = "pageSize", required = false) Integer pageSize) {
         return ResponseEntity.ok()
                 .header("Access-Control-Allow-Origin", "*")
                 .body(service.getDevices(pageNumber, pageSize));

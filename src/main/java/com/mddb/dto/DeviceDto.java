@@ -9,6 +9,6 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DeviceDto {
-    Long id;
+    Integer id;
     String modelName;
 }

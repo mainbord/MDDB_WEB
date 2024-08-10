@@ -18,19 +18,18 @@ Configuration:
           size: 500 MB
       DefaultRollOverStrategy:
         max: 30
-
+    console:
+      -
+        name: STDOUT
+        target: SYSTEM_OUT
+        PatternLayout:
+          pattern: "[%d{ISO8601}][%mdc{sessionId}][%t][%1p][%c{1}][%m]%n"
 
   Loggers:
     logger:
     -
       name: app
-      level: info
-      additivity: false
-      AppenderRef:
-        ref: app
-    -
-      name: root
-      level: error
+      level: INFO
       additivity: false
       AppenderRef:
         ref: app
@@ -39,4 +38,4 @@ Configuration:
       level: INFO
       additivity: false
       AppenderRef:
-        ref: app
+        ref: STDOUT

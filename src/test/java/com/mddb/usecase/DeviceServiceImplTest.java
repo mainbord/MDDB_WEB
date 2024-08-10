@@ -7,7 +7,7 @@ import com.mddb.mapper.DeviceMapper;
 import com.mddb.usecase.impl.DeviceServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mapstruct.factory.Mappers;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -31,7 +31,7 @@ class DeviceServiceImplTest {
     private DeviceServiceImpl service;
 
     @Mock
-    DeviceMapper mapper = Mappers.getMapper(DeviceMapper.class);
+    DeviceMapper mapper;
 
     @Test
     public void testGetDevice() {

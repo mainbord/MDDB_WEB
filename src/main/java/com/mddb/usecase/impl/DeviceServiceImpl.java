@@ -44,7 +44,7 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public Map<Long, String> getDevicesByCompany(String company) {
+    public Map<Integer, String> getDevicesByCompany(String company) {
         return repository.findByCompanyName(company).stream()
                 .collect(Collectors.toMap(Device::getId, Device::getModelName));
     }
