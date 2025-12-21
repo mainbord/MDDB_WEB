@@ -26,12 +26,12 @@ class DeviceServiceImplTest {
 
     @Mock
     private DeviceRepository repository;
+    @Mock
+    private DeviceMapper mapper;
 
     @InjectMocks
     private DeviceServiceImpl service;
 
-    @Mock
-    DeviceMapper mapper;
 
     @Test
     public void testGetDevice() {

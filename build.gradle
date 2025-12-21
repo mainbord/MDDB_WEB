@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.2'
-    id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.springframework.boot' version '4.0.1'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group 'mcorp'
@@ -9,7 +9,7 @@ version '1.0.0'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
@@ -17,48 +17,48 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    providedRuntime
-    implementation.exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
-    implementation.exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-}
 
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-undertow'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
     implementation group: 'org.postgresql', name: 'postgresql'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2'
-    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
-    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2'
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
 
     compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 
 
-    compileOnly group: 'org.projectlombok', name: 'lombok'
-    annotationProcessor group: 'org.projectlombok', name: 'lombok'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.42'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.42'
 
-//    compileOnly group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
-//    annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.5.Final'
+    compileOnly group: 'org.mapstruct', name: 'mapstruct', version: '1.6.3'
+    annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.6.3'
 
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.0'
 
-    implementation group: 'org.jsoup', name: 'jsoup', version: '1.18.1'
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.21.2'
 
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:10.1.26'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.14'
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation('org.junit.jupiter:junit-jupiter-api')
+    testImplementation('org.junit.platform:junit-platform-commons')
+
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
     testRuntimeOnly('org.junit.vintage:junit-vintage-engine')
-    testImplementation('org.junit.platform:junit-platform-commons')
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+
     testCompileOnly group: 'org.mockito', name: 'mockito-junit-jupiter'
     testCompileOnly group: 'org.mockito', name: 'mockito-core'
     testImplementation('com.h2database:h2')
-    testCompileOnly 'org.projectlombok:lombok'
-    testAnnotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok:1.18.42'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-restclient-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 }
 
 tasks.named('test') {
