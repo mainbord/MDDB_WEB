@@ -2,6 +2,7 @@ package com.mddb.dao;
 
 import com.mddb.domain.Device;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Date;
@@ -10,10 +11,6 @@ import java.util.List;
 /**
  * Created by mainbord on 29.10.17.
  */
-public interface DeviceRepository extends PagingAndSortingRepository<Device, Long>, JpaSpecificationExecutor<Device> {
-
-    List<Device> findByReleaseDate(Date date);
-    List<Device> findByCompanyName(String companyName);
-    List<Device> findByIdPhonedbIn(List<Integer> ids);
+public interface DeviceRepositorySetter extends CrudRepository<Device, Long>, JpaSpecificationExecutor<Device> {
 
 }

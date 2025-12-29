@@ -1,12 +1,13 @@
 package com.mddb.usecase.impl;
 
 import com.mddb.dao.DeviceRepository;
+import com.mddb.dao.DeviceRepositorySetter;
 import com.mddb.domain.Device;
 import com.mddb.dto.DeviceDto;
 import com.mddb.mapper.DeviceMapper;
 import com.mddb.usecase.DeviceService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,13 @@ import java.util.stream.Collectors;
  * Created by mainbord on 20.09.17.
  */
 @Service
-@Log4j2(topic = "app")
+@Slf4j
 @RequiredArgsConstructor
 public class DeviceServiceImpl implements DeviceService {
 
     private final DeviceRepository repository;
     private final DeviceMapper deviceMapper;
+    private final DeviceRepositorySetter deviceRepositorySetter;
 
     @Override
     public List<DeviceDto> getDevices(Integer pageNumber, Integer pageSize) {
@@ -37,7 +39,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Set<String> getCompaniesNames() {
-        return repository.findAll().stream()
+        return repository.findAll(PageRequest.of(0, 100)).stream()
                 .map(Device::getCompanyName)
                 .collect(Collectors.toSet());
     }
@@ -51,7 +53,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Device getDevice(Long id) {
-        return repository.findById(id).orElse(null);
+        return deviceRepositorySetter.findById(id).orElse(null);
     }
 
 }

@@ -22,6 +22,9 @@ public class Device {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
+    @Column(name = "ID_PHONEDB")
+    Integer idPhonedb;
+
     @Column(name = "RELEASE_DATE")
     @Temporal(TemporalType.DATE)
     Date releaseDate;

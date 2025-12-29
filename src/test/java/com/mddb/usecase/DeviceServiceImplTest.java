@@ -1,6 +1,7 @@
 package com.mddb.usecase;
 
 import com.mddb.dao.DeviceRepository;
+import com.mddb.dao.DeviceRepositorySetter;
 import com.mddb.domain.Device;
 import com.mddb.dto.DeviceDto;
 import com.mddb.mapper.DeviceMapper;
@@ -27,6 +28,8 @@ class DeviceServiceImplTest {
     @Mock
     private DeviceRepository repository;
     @Mock
+    private DeviceRepositorySetter deviceRepositorySetter;
+    @Mock
     private DeviceMapper mapper;
 
     @InjectMocks
@@ -37,7 +40,7 @@ class DeviceServiceImplTest {
     public void testGetDevice() {
         Long deviceId = 1L;
         Device expectedResponse = Device.builder().build();
-        when(repository.findById(deviceId)).thenReturn(Optional.ofNullable(expectedResponse));
+        when(deviceRepositorySetter.findById(deviceId)).thenReturn(Optional.ofNullable(expectedResponse));
         Device response = service.getDevice(deviceId);
         assertEquals(expectedResponse, response);
     }

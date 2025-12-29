@@ -1,7 +1,6 @@
 package com.mddb.exception;
 
-import lombok.extern.log4j.Log4j2;
-import org.slf4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,7 +12,7 @@ import java.util.Map;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
-@Log4j2(topic = "app")
+@Slf4j
 public abstract class BaseExceptionHandler {
     private static final ExceptionMapping DEFAULT_ERROR = new ExceptionMapping(
             "SERVER_ERROR",

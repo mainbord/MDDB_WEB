@@ -105,3 +105,5 @@ CREATE TABLE device
   HOLL_SENSOR  BOOLEAN,
   TRS_35 BOOLEAN
 );
+
+alter table device add column id_phonedb int;
