@@ -1,7 +1,9 @@
 package com.mddb.controller;
 
 import com.mddb.usecase.DeviceLoader;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,8 +15,8 @@ public class DeviceLoaderController {
 
     private final DeviceLoader loader;
 
-    @PostMapping("/devices")
-    public void loadDevices(){
-        loader.loadDevices();
+    @PostMapping("/devices/{source}")
+    public void loadDevices(@PathVariable String source) {
+        loader.loadDevices(source);
     }
 }

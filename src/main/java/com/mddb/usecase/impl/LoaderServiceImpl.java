@@ -7,6 +7,7 @@ import com.mddb.domain.Device;
 import com.mddb.usecase.DeviceLoader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +19,18 @@ import java.util.List;
 public class LoaderServiceImpl implements DeviceLoader {
 
     private final DeviceRepository repository;
-    private final DeviceClient deviceClient;
+    @Qualifier("phoneDbClient")
+    private final DeviceClient phoneDbClient;
+    @Qualifier("deviceSpecificationsClient")
+    private final DeviceClient deviceSpecificationsClient;
     private final DeviceRepositorySetter deviceRepositorySetter;
 
     private final int pageSize = 100;
 
     @Override
     @Async
-    public void loadDevices() {
+    public void loadDevices(String source) {
+        DeviceClient deviceClient = getDeviceClient(source);
         log.info("loadDevices started");
         try {
             while (true) {
@@ -45,5 +50,15 @@ public class LoaderServiceImpl implements DeviceLoader {
         }
 
         log.info("ALL devices saved");
+    }
+
+    private DeviceClient getDeviceClient(String clientName) {
+        DeviceClient deviceClient = phoneDbClient;
+        switch (clientName) {
+            case "phoneDb" -> deviceClient = phoneDbClient;
+            case "deviceSpecifications" -> deviceClient = deviceSpecificationsClient;
+            default -> throw new RuntimeException("Not found " + clientName);
+        }
+        return deviceClient;
     }
 }
