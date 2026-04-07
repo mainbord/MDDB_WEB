@@ -37,10 +37,9 @@ public class PhoneDbClient implements DeviceClient {
     int phoneDbPageNumber = 0;
     final int phoneDbPagesize = 29;
 
-
     public List<Device> getDevicesWithPaging() {
         Set<String> urlDevices = getUrlDevices();
-        final CopyOnWriteArrayList<Device> devices = new CopyOnWriteArrayList<>();
+        final List<Device> devices = new CopyOnWriteArrayList<>();
         try {
             log.info("Getting devices started, devices count is {}, page number is {}", urlDevices.size(), phoneDbPageNumber);
             urlDevices.parallelStream().forEach(url -> {
@@ -48,18 +47,16 @@ public class PhoneDbClient implements DeviceClient {
                     String urlThread = url + "&d=detailed_specs";
                     String decode = URLDecoder.decode(urlThread, "UTF-8");
                     TimeUnit.MILLISECONDS.sleep(new Random(100).nextInt());
-                    Document doc =
-                            Jsoup.connect(urlThread)
-                                    .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36")
-                                    .referrer("none")
-                                    .get();
+                    Document doc = Jsoup.connect(urlThread)
+                            .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36")
+                            .referrer("none")
+                            .get();
                     if (doc == null) return;
                     Elements table = doc.select("table");
                     if (table.size() == 0) return;
                     Elements tds = table.get(0).select(("td"));
                     Map<String, String> params = new HashMap<>();
-                    for (Element el :
-                            tds) {
+                    for (Element el : tds) {
                         if (el.select(("strong")).size() != 0) {
                             Element key = el.select(("strong")).get(0);
                             Element value = el.nextElementSibling();
@@ -76,14 +73,13 @@ public class PhoneDbClient implements DeviceClient {
                     e.printStackTrace();
                 }
             });
-
             log.info("Devices returned" + devices.size());
         } finally {
             phoneDbPageNumber = phoneDbPageNumber + phoneDbPagesize;
         }
-
         return devices;
     }
+
 
     @Override
     public void resetPageNumber() {
@@ -99,8 +95,7 @@ public class PhoneDbClient implements DeviceClient {
         try {
             log.info("Loading current page is {}", phoneDbPageNumber);
             TimeUnit.MILLISECONDS.sleep(new Random(10).nextInt());
-            Document doc;
-            doc = getDocument(phoneDbPageNumber);
+            Document doc = getDocument(phoneDbPageNumber);
             if (doc == null) return new HashSet<>();
             Elements elements = doc.getElementsByClass("content_block_title");
             if (elements.size() == 0) return new HashSet<>();
