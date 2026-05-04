@@ -1,12 +1,10 @@
-version: '3.9'
-
 services:
 
   db:
     image: postgres
     restart: always
     # set shared memory limit when using docker-compose
-    shm_size: 128mb
+    shm_size: 512mb
     # or set shared memory limit when deploy via swarm stack
     #volumes:
     #  - type: tmpfs
@@ -17,5 +15,24 @@ services:
       POSTGRES_PASSWORD: mcorp
       POSTGRES_USER: mcorp
       POSTGRES_DB: mddb
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U mcorp -d mddb" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     ports:
       - "5432:5432"
+
+  liquibase:
+    image: liquibase/liquibase:4.33
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./src/main/resources/database/changelog:/liquibase/changelog:ro
+    command:
+      - --url=jdbc:postgresql://db:5432/mddb
+      - --username=mcorp
+      - --password=mcorp
+      - --changeLogFile=changelog/db.changelog-master.xml
+      - update

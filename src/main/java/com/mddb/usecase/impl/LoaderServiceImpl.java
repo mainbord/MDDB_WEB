@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 @Slf4j
 public class LoaderServiceImpl implements DeviceLoader {
 
-    private static final int PARALLELISM = 10;
+    private static final int PARALLELISM = 4;
 
     private final DeviceRepository repository;
 

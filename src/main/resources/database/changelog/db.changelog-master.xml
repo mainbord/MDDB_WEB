@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001-create-device-table" author="codex">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="device"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="device">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="device_pkey" nullable="false"/>
+            </column>
+            <column name="id_phonedb" type="INT"/>
+            <column name="release_date" type="DATE"/>
+            <column name="company_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="model_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operating_system" type="VARCHAR(255)"/>
+            <column name="form_factor" type="VARCHAR(255)"/>
+            <column name="width" type="VARCHAR(255)"/>
+            <column name="height" type="VARCHAR(255)"/>
+            <column name="depth" type="VARCHAR(255)"/>
+            <column name="weight" type="VARCHAR(255)"/>
+            <column name="body_material" type="VARCHAR(255)"/>
+            <column name="body_color" type="VARCHAR(255)"/>
+            <column name="water_proof" type="INT"/>
+            <column name="dust_proof" type="INT"/>
+            <column name="crash_worthiness" type="BOOLEAN"/>
+            <column name="packaging" type="VARCHAR(255)"/>
+            <column name="soc" type="VARCHAR(255)"/>
+            <column name="cpu_number_of_cores" type="INT"/>
+            <column name="cpu_architecture" type="VARCHAR(255)"/>
+            <column name="cpu_max_frequency_per_core" type="VARCHAR(255)"/>
+            <column name="cpu_instruction" type="VARCHAR(255)"/>
+            <column name="cpu_manufacturing_method" type="INT"/>
+            <column name="graphical_controller_name" type="VARCHAR(255)"/>
+            <column name="graphical_controller_gpu_clock" type="INT"/>
+            <column name="ram_size" type="VARCHAR(255)"/>
+            <column name="ram_type" type="VARCHAR(255)"/>
+            <column name="ram_clock" type="INT"/>
+            <column name="rom" type="VARCHAR(255)"/>
+            <column name="sound_controller" type="VARCHAR(255)"/>
+            <column name="battery_type" type="VARCHAR(255)"/>
+            <column name="battery_capacity" type="INT"/>
+            <column name="gps" type="VARCHAR(255)"/>
+            <column name="fm_receiver" type="BOOLEAN"/>
+            <column name="fm_transmitter" type="BOOLEAN"/>
+            <column name="wireless_charger" type="VARCHAR(255)"/>
+            <column name="antenna" type="VARCHAR(255)"/>
+            <column name="vibration" type="BOOLEAN"/>
+            <column name="led_notification" type="VARCHAR(255)"/>
+            <column name="speaker" type="VARCHAR(255)"/>
+            <column name="display_diagonal" type="VARCHAR(255)"/>
+            <column name="display_resolution" type="VARCHAR(255)"/>
+            <column name="display_type" type="VARCHAR(255)"/>
+            <column name="display_ratio" type="VARCHAR(255)"/>
+            <column name="display_color_amount" type="INT"/>
+            <column name="display_sensor_type" type="VARCHAR(255)"/>
+            <column name="display_multitouch" type="INT"/>
+            <column name="display_glass_description" type="VARCHAR(255)"/>
+            <column name="display_glare_filter" type="BOOLEAN"/>
+            <column name="display_oleophobic" type="BOOLEAN"/>
+            <column name="sms" type="BOOLEAN"/>
+            <column name="mms" type="BOOLEAN"/>
+            <column name="email" type="BOOLEAN"/>
+            <column name="gsm" type="BOOLEAN"/>
+            <column name="gprs" type="BOOLEAN"/>
+            <column name="edge" type="BOOLEAN"/>
+            <column name="umts" type="BOOLEAN"/>
+            <column name="hspa" type="BOOLEAN"/>
+            <column name="lte" type="BOOLEAN"/>
+            <column name="cdma" type="BOOLEAN"/>
+            <column name="bluetooth" type="BOOLEAN"/>
+            <column name="wifi" type="BOOLEAN"/>
+            <column name="infrared" type="BOOLEAN"/>
+            <column name="gyroscope" type="BOOLEAN"/>
+            <column name="accelerometer" type="BOOLEAN"/>
+            <column name="compass" type="BOOLEAN"/>
+            <column name="pulsometer" type="BOOLEAN"/>
+            <column name="ultra_violet_sensor" type="BOOLEAN"/>
+            <column name="proximity_sensor" type="BOOLEAN"/>
+            <column name="luminance_sensor" type="BOOLEAN"/>
+            <column name="barometer" type="BOOLEAN"/>
+            <column name="temerature_battery_sensor" type="BOOLEAN"/>
+            <column name="fingerprint_sensor" type="BOOLEAN"/>
+            <column name="pedometer_sensor" type="BOOLEAN"/>
+            <column name="game_rotation_vector" type="BOOLEAN"/>
+            <column name="geomagnetic_rotation_vector" type="BOOLEAN"/>
+            <column name="significant_motion_detector" type="BOOLEAN"/>
+            <column name="holl_sensor" type="BOOLEAN"/>
+            <column name="trs_35" type="BOOLEAN"/>
+            <column name="volte" type="BOOLEAN"/>
+            <column name="video_call" type="BOOLEAN"/>
+            <column name="wifi_direct" type="BOOLEAN"/>
+            <column name="wifi_hotspot" type="BOOLEAN"/>
+            <column name="dlna" type="BOOLEAN"/>
+            <column name="miracast" type="BOOLEAN"/>
+            <column name="bluetooth_le" type="BOOLEAN"/>
+            <column name="ant_plus" type="BOOLEAN"/>
+            <column name="nfc" type="BOOLEAN"/>
+            <column name="milfare" type="BOOLEAN"/>
+            <column name="nfcpayments" type="BOOLEAN"/>
+            <column name="secureelemet_payments" type="BOOLEAN"/>
+            <column name="irda" type="BOOLEAN"/>
+            <column name="mhl" type="BOOLEAN"/>
+            <column name="video_exit_to_display_port" type="BOOLEAN"/>
+            <column name="slimport" type="BOOLEAN"/>
+            <column name="usb" type="BOOLEAN"/>
+            <column name="usb_host" type="BOOLEAN"/>
+            <column name="usb_tethering" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

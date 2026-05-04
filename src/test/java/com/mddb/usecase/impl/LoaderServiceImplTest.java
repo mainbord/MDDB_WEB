@@ -10,9 +10,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
@@ -127,6 +133,28 @@ class LoaderServiceImplTest {
     }
 
     @Test
+    void loadDevices_shouldRequestDifferentPages_whenClientSupportsParallelPageLoading() {
+        ParallelDeviceClient parallelPhoneDbClient = new ParallelDeviceClient();
+        service = new LoaderServiceImpl(
+                repository,
+                parallelPhoneDbClient,
+                deviceSpecificationsClient,
+                deviceRepositorySetter
+        );
+
+        when(repository.findByIdPhonedbIn(anyList()))
+                .thenReturn(List.of());
+
+        service.loadDevices("phoneDb");
+
+        List<Integer> requestedPages = new ArrayList<>(parallelPhoneDbClient.requestedPages);
+        assertTrue(requestedPages.containsAll(List.of(0, 29, 58, 87)));
+        assertEquals(4, requestedPages.stream()
+                .filter(page -> List.of(0, 29, 58, 87).contains(page))
+                .count());
+    }
+
+    @Test
     void loadDevices_shouldResetPageNumber_whenRepositoryThrowsException() {
         Device device = device(401);
 
@@ -162,5 +190,50 @@ class LoaderServiceImplTest {
         return Device.builder()
                 .idPhonedb(idPhonedb)
                 .build();
+    }
+
+    private static class ParallelDeviceClient implements DeviceClient {
+
+        private final AtomicInteger callCount = new AtomicInteger();
+        private final CountDownLatch firstBatchStarted = new CountDownLatch(4);
+        private final ConcurrentLinkedQueue<Integer> requestedPages = new ConcurrentLinkedQueue<>();
+
+        @Override
+        public List<Device> getDevicesWithPaging() {
+            throw new UnsupportedOperationException("Parallel loader must request a concrete page");
+        }
+
+        @Override
+        public List<Device> getDevicesByPage(int pageNumber) {
+            requestedPages.add(pageNumber);
+            int currentCall = callCount.incrementAndGet();
+
+            if (currentCall <= 4) {
+                firstBatchStarted.countDown();
+                try {
+                    assertTrue(firstBatchStarted.await(5, TimeUnit.SECONDS));
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException(e);
+                }
+                return List.of(device(pageNumber + 1));
+            }
+
+            return List.of();
+        }
+
+        @Override
+        public void resetPageNumber() {
+        }
+
+        @Override
+        public boolean supportsParallelPageLoading() {
+            return true;
+        }
+
+        @Override
+        public int pageStep() {
+            return 29;
+        }
     }
 }
