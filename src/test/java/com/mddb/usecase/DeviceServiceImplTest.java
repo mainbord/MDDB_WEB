@@ -39,7 +39,7 @@ class DeviceServiceImplTest {
     @Test
     public void testGetDevice() {
         Long deviceId = 1L;
-        Device expectedResponse = Device.builder().build();
+        Device expectedResponse = new Device();
         when(deviceRepositorySetter.findById(deviceId)).thenReturn(Optional.ofNullable(expectedResponse));
         Device response = service.getDevice(deviceId);
         assertEquals(expectedResponse, response);
@@ -49,9 +49,9 @@ class DeviceServiceImplTest {
     public void testGetDevices() {
         int pageNumber = 1;
         int pageSize = 10;
-        Device[] devices = {Device.builder().build(), Device.builder().build(), Device.builder().build()};
+        Device[] devices = {new Device(), new Device(), new Device()};
         List<Device> expectedResponse = Arrays.asList(devices);
-        PageRequest request = PageRequest.of(pageNumber, pageSize);
+        PageRequest request = PageRequest.of(0, pageSize);
         PageImpl<Device> page = new PageImpl<>(expectedResponse);
         when(repository.findAll(request)).thenReturn(page);
         List<DeviceDto> response = service.getDevices(pageNumber, pageSize);

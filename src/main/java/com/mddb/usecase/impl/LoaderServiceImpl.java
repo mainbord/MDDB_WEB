@@ -109,7 +109,7 @@ public class LoaderServiceImpl implements DeviceLoader {
 
     private void saveOnlyNewDevices(List<Device> devices) {
         List<Integer> ids = devices.stream()
-                .map(Device::getIdPhonedb)
+                .map(Device::idPhonedb)
                 .filter(Objects::nonNull)
                 .toList();
 
@@ -118,13 +118,13 @@ public class LoaderServiceImpl implements DeviceLoader {
         }
 
         Set<Integer> existingIds = repository.findByIdPhonedbIn(ids).stream()
-                .map(Device::getIdPhonedb)
+                .map(Device::idPhonedb)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
 
         List<Device> newDevices = devices.stream()
-                .filter(device -> device.getIdPhonedb() != null)
-                .filter(device -> !existingIds.contains(device.getIdPhonedb()))
+                .filter(device -> device.idPhonedb() != null)
+                .filter(device -> !existingIds.contains(device.idPhonedb()))
                 .toList();
 
         if (!newDevices.isEmpty()) {

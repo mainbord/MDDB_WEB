@@ -31,7 +31,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public List<DeviceDto> getDevices(Integer pageNumber, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Pageable pageable = PageRequest.of(toZeroBasedPageNumber(pageNumber), pageSize == null ? 10 : pageSize);
         return repository.findAll(pageable).stream()
                 .map(deviceMapper::map)
                 .collect(Collectors.toList());
@@ -40,20 +40,27 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public Set<String> getCompaniesNames() {
         return repository.findAll(PageRequest.of(0, 100)).stream()
-                .map(Device::getCompanyName)
+                .map(Device::companyName)
                 .collect(Collectors.toSet());
     }
 
     @Override
     public Map<Integer, String> getDevicesByCompany(String company) {
         return repository.findByCompanyName(company).stream()
-                .collect(Collectors.toMap(Device::getId, Device::getModelName));
+                .collect(Collectors.toMap(Device::id, Device::modelName));
     }
 
 
     @Override
     public Device getDevice(Long id) {
         return deviceRepositorySetter.findById(id).orElse(null);
+    }
+
+    private int toZeroBasedPageNumber(Integer pageNumber) {
+        if (pageNumber == null || pageNumber < 1) {
+            return 0;
+        }
+        return pageNumber - 1;
     }
 
 }

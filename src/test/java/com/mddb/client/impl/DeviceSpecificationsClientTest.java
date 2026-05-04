@@ -95,19 +95,19 @@ class DeviceSpecificationsClientTest {
         Device device = client.parseDevice(Jsoup.parse(html), "https://www.devicespecifications.com/en/model/89ef5bb4");
 
         assertNotNull(device);
-        assertEquals("Samsung", device.getCompanyName());
-        assertEquals("Galaxy S23", device.getModelName());
-        assertEquals("70.9 mm", device.getWidth());
-        assertEquals("146.3 mm", device.getHeight());
-        assertEquals("7.6 mm", device.getDepth());
-        assertEquals("168 g", device.getWeight());
-        assertEquals("Qualcomm Snapdragon 8 Gen 2 for Galaxy", device.getSoc());
-        assertEquals("3360", device.getMaxFrequencyPerCore());
-        assertEquals("8", device.getRamSize());
-        assertEquals("4266 MHz", device.getRamType());
-        assertEquals("1080 x 2340 pixels", device.getDisplayResolution());
-        assertEquals(30, device.getDisplayColorAmount());
-        assertEquals(3900, device.getBatteryCapacity());
-        assertEquals("GPS, GLONASS", device.getGps());
+        assertEquals("Samsung", device.companyName());
+        assertEquals("Galaxy S23", device.modelName());
+        assertEquals("70.9 mm", device.width());
+        assertEquals("146.3 mm", device.height());
+        assertEquals("7.6 mm", device.depth());
+        assertEquals("168 g", device.weight());
+        assertEquals("Qualcomm Snapdragon 8 Gen 2 for Galaxy", device.soc());
+        assertEquals("3360", device.maxFrequencyPerCore());
+        assertEquals("8", device.ramSize());
+        assertEquals("4266 MHz", device.ramType());
+        assertEquals("1080 x 2340 pixels", device.displayResolution());
+        assertEquals(30, device.displayColorAmount());
+        assertEquals(3900, device.batteryCapacity());
+        assertEquals("GPS, GLONASS", device.gps());
     }
 }
